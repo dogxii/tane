@@ -1,0 +1,279 @@
+/* Design tokens. Every component reads from these; none hard-code a color. */
+
+:root {
+  color-scheme: light;
+  --hue: 255;
+
+  --bg: oklch(0.982 0.002 95);
+  --bg-sunken: oklch(0.962 0.003 95);
+  --surface: oklch(1 0 0);
+  --surface-hover: oklch(0.965 0.003 95);
+  --surface-active: oklch(0.935 0.004 95);
+  --border: oklch(0.915 0.004 95);
+  --border-strong: oklch(0.85 0.005 95);
+  --text: oklch(0.23 0.006 95);
+  --text-2: oklch(0.47 0.007 95);
+  --text-3: oklch(0.62 0.007 95);
+  --inverse: oklch(0.23 0.006 95);
+  --inverse-hover: oklch(0.34 0.006 95);
+  --on-inverse: oklch(0.985 0.002 95);
+
+  --accent: oklch(0.55 0.15 var(--hue));
+  --accent-soft: oklch(0.55 0.15 var(--hue) / 0.11);
+  --accent-text: oklch(0.47 0.15 var(--hue));
+  --focus: oklch(0.58 0.16 var(--hue) / 0.45);
+
+  --danger: oklch(0.56 0.19 27);
+  --danger-soft: oklch(0.56 0.19 27 / 0.1);
+  --warning: oklch(0.68 0.16 60);
+  --success: oklch(0.6 0.14 150);
+  --backdrop: oklch(0.25 0.01 95 / 0.28);
+
+  --chip-bg-l: 0.955;
+  --chip-bg-c: 0.03;
+  --chip-fg-l: 0.42;
+  --chip-fg-c: 0.11;
+  --dot-l: 0.62;
+  --dot-c: 0.16;
+
+  --shadow-sm: 0 1px 2px oklch(0.2 0.01 95 / 0.06);
+  --shadow-md: 0 1px 2px oklch(0.2 0.01 95 / 0.06), 0 6px 20px -6px oklch(0.2 0.01 95 / 0.14);
+  --shadow-lg: 0 2px 6px oklch(0.2 0.01 95 / 0.07), 0 18px 48px -12px oklch(0.2 0.01 95 / 0.26);
+
+  --r-sm: 5px;
+  --r-md: 7px;
+  --r-lg: 11px;
+  --r-xl: 15px;
+
+  --fs-xs: 11.5px;
+  --fs-sm: 12.5px;
+  --fs-md: 13.5px;
+  --fs-lg: 15px;
+  --fs-xl: 19px;
+  --fs-2xl: 26px;
+
+  --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --fast: 110ms;
+  --normal: 190ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: oklch(0.175 0.004 265);
+    --bg-sunken: oklch(0.15 0.004 265);
+    --surface: oklch(0.215 0.005 265);
+    --surface-hover: oklch(0.255 0.006 265);
+    --surface-active: oklch(0.295 0.007 265);
+    --border: oklch(0.275 0.006 265);
+    --border-strong: oklch(0.36 0.008 265);
+    --text: oklch(0.94 0.003 265);
+    --text-2: oklch(0.73 0.006 265);
+    --text-3: oklch(0.58 0.007 265);
+    --inverse: oklch(0.94 0.003 265);
+    --inverse-hover: oklch(0.84 0.004 265);
+    --on-inverse: oklch(0.19 0.004 265);
+    --accent: oklch(0.72 0.13 var(--hue));
+    --accent-soft: oklch(0.72 0.13 var(--hue) / 0.16);
+    --accent-text: oklch(0.8 0.11 var(--hue));
+    --focus: oklch(0.72 0.13 var(--hue) / 0.5);
+    --danger: oklch(0.7 0.17 25);
+    --danger-soft: oklch(0.7 0.17 25 / 0.15);
+    --backdrop: oklch(0.08 0.005 265 / 0.55);
+    --chip-bg-l: 0.28;
+    --chip-bg-c: 0.04;
+    --chip-fg-l: 0.84;
+    --chip-fg-c: 0.09;
+    --dot-l: 0.72;
+    --dot-c: 0.15;
+    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3);
+    --shadow-md: 0 1px 2px oklch(0 0 0 / 0.3), 0 8px 22px -6px oklch(0 0 0 / 0.5);
+    --shadow-lg: 0 2px 6px oklch(0 0 0 / 0.35), 0 22px 56px -12px oklch(0 0 0 / 0.7);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: oklch(0.175 0.004 265);
+  --bg-sunken: oklch(0.15 0.004 265);
+  --surface: oklch(0.215 0.005 265);
+  --surface-hover: oklch(0.255 0.006 265);
+  --surface-active: oklch(0.295 0.007 265);
+  --border: oklch(0.275 0.006 265);
+  --border-strong: oklch(0.36 0.008 265);
+  --text: oklch(0.94 0.003 265);
+  --text-2: oklch(0.73 0.006 265);
+  --text-3: oklch(0.58 0.007 265);
+  --inverse: oklch(0.94 0.003 265);
+  --inverse-hover: oklch(0.84 0.004 265);
+  --on-inverse: oklch(0.19 0.004 265);
+  --accent: oklch(0.72 0.13 var(--hue));
+  --accent-soft: oklch(0.72 0.13 var(--hue) / 0.16);
+  --accent-text: oklch(0.8 0.11 var(--hue));
+  --focus: oklch(0.72 0.13 var(--hue) / 0.5);
+  --danger: oklch(0.7 0.17 25);
+  --danger-soft: oklch(0.7 0.17 25 / 0.15);
+  --backdrop: oklch(0.08 0.005 265 / 0.55);
+  --chip-bg-l: 0.28;
+  --chip-bg-c: 0.04;
+  --chip-fg-l: 0.84;
+  --chip-fg-c: 0.09;
+  --dot-l: 0.72;
+  --dot-c: 0.15;
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 1px 2px oklch(0 0 0 / 0.3), 0 8px 22px -6px oklch(0 0 0 / 0.5);
+  --shadow-lg: 0 2px 6px oklch(0 0 0 / 0.35), 0 22px 56px -12px oklch(0 0 0 / 0.7);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+/* Clicking a text field also matches :focus-visible, so rings need real keyboard use (see main.ts). */
+:root:not([data-keyboard]) :focus-visible {
+  outline: none;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+::placeholder {
+  color: var(--text-3);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.prose {
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.prose > * + * {
+  margin-top: 0.6em;
+}
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.prose ul,
+.prose ol {
+  margin-block: 0.5em;
+  padding-left: 1.4em;
+}
+.prose a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--surface-active);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+.prose pre {
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  overflow-x: auto;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--border-strong);
+  color: var(--text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
