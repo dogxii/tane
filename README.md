@@ -9,6 +9,18 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/dogxii/tane/stargazers"><img src="https://img.shields.io/github/stars/dogxii/tane?style=flat" alt="GitHub stars" /></a>
+  <a href="https://github.com/dogxii/tane/commits/main"><img src="https://img.shields.io/github/last-commit/dogxii/tane?style=flat" alt="Last commit" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/dogxii/tane?style=flat" alt="MIT license" /></a>
+  <a href="https://developers.cloudflare.com/workers/"><img src="https://img.shields.io/badge/Cloudflare-Workers-F38020?style=flat&logo=cloudflare&logoColor=white" alt="Cloudflare Workers" /></a>
+  <a href="https://svelte.dev"><img src="https://img.shields.io/badge/Svelte-5-FF3E00?style=flat&logo=svelte&logoColor=white" alt="Svelte 5" /></a>
+</p>
+
+<p align="center">
+  English | <a href="README.zh-CN.md">简体中文</a>
+</p>
+
+<p align="center">
   <img src="docs/screenshot.png" alt="A Tane board with cards grouped by status" />
 </p>
 
@@ -104,6 +116,15 @@ test/            API integration tests
 ```
 
 Built with [Hono](https://hono.dev) and [Svelte 5](https://svelte.dev).
+
+## Star history
+
+<a href="https://star-history.com/#dogxii/tane&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=dogxii/tane&type=Date&theme=dark" />
+    <img alt="Star history chart" src="https://api.star-history.com/svg?repos=dogxii/tane&type=Date" />
+  </picture>
+</a>
 
 ## License
 
