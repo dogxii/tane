@@ -8,7 +8,7 @@
   import Search from '@lucide/svelte/icons/search';
   import { api } from '../lib/api';
   import { firstLine, relativeTime } from '../lib/format';
-  import { Button, Chip, Empty, Input, Picker, Segmented, Skeleton } from '../lib/ui';
+  import { Button, Chip, Dialog, Empty, Field, Input, Picker, Segmented, Skeleton, Textarea } from '../lib/ui';
   import type { ProjectStore } from '../lib/store.svelte';
   import type { Feedback } from '../lib/types';
 
@@ -65,12 +65,44 @@
       feedbackId: item.id,
     };
   }
+
+  let adding = $state(false);
+  let saving = $state(false);
+  let draft = $state('');
+  let source = $state('');
+
+  async function add() {
+    const body = draft.trim();
+    if (!body || saving) return;
+    saving = true;
+    // A fresh id on every entry: two people saying the same words are two mentions.
+    const item = { source: source.trim() || '手动', external_id: crypto.randomUUID(), body };
+    const saved = await store.send('post', '/feedback', { items: [item] });
+    saving = false;
+    if (!saved) return;
+    adding = false;
+    draft = '';
+    if (tab !== 'inbox') {
+      items = null;
+      tab = 'inbox';
+    }
+  }
+
+  function onformkeydown(event: KeyboardEvent) {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
+      event.preventDefault();
+      void add();
+    }
+  }
 </script>
 
 <div class="wrap">
   <div class="toolbar">
     <Segmented items={tabs} bind:value={tab} label="反馈状态" onchange={() => (items = null)} />
-    <Input icon={Search} bind:value={query} placeholder="搜索反馈" class="search" aria-label="搜索反馈" />
+    <div class="tools">
+      <Input icon={Search} bind:value={query} placeholder="搜索反馈" class="search" aria-label="搜索反馈" />
+      <Button size="sm" icon={Plus} onclick={() => (adding = true)}>添加反馈</Button>
+    </div>
   </div>
 
   <div class="scroll">
@@ -84,7 +116,7 @@
       <Empty
         icon={Inbox}
         title={query ? '没有匹配的反馈' : tab === 'inbox' ? '收件箱是空的' : '这里还没有内容'}
-        description={tab === 'inbox' && !query ? '公开看板收到的建议，以及 Agent 收集的反馈，都会出现在这里。' : undefined}
+        description={tab === 'inbox' && !query ? '公开提交的建议、Agent 收集的反馈和你手动添加的内容，都会出现在这里。' : undefined}
       />
     {:else}
       <div class="list">
@@ -122,6 +154,22 @@
   </div>
 </div>
 
+<Dialog bind:open={adding} title="添加反馈">
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="form" onkeydown={onformkeydown}>
+    <Field label="内容">
+      <Textarea bind:value={draft} rows={4} maxlength={5000} placeholder="别人说了什么" />
+    </Field>
+    <Field label="来源">
+      <Input bind:value={source} maxlength={40} placeholder="手动" />
+    </Field>
+  </div>
+  {#snippet footer()}
+    <Button onclick={() => (adding = false)}>取消</Button>
+    <Button variant="primary" disabled={!draft.trim() || saving} onclick={add}>添加</Button>
+  {/snippet}
+</Dialog>
+
 <style>
   .wrap {
     flex: 1;
@@ -136,9 +184,19 @@
     gap: 10px;
     padding: 0 20px 10px;
   }
-  .toolbar :global(.search) {
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tools :global(.search) {
     width: 220px;
     height: 28px;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
   .scroll {
     flex: 1;
@@ -193,8 +251,16 @@
     overflow-wrap: anywhere;
   }
   @media (max-width: 640px) {
-    header {
+    header,
+    .toolbar {
       flex-wrap: wrap;
+    }
+    .tools {
+      width: 100%;
+    }
+    .tools :global(.search) {
+      flex: 1;
+      width: auto;
     }
   }
 </style>
